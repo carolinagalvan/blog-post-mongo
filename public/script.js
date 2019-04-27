@@ -22,14 +22,26 @@ function displayPostList(data){
     console.log(data);
     for(let i = 0; i< data.posts.length; i++){
         $('#posts').append(`
-            <li>${data.posts[i].title}</li>
+            <li>
+                <p>Title: ${data.posts[i].title}</p>
+                <p>Author: ${data.posts[i].author}</p>
+                <p>Content: ${data.posts[i].content}</p>
+                <p>Publish Date: ${data.posts[i].publishDate}</p>
+            </li>
         `)
     }
 }
 
 // Update list of posts
-function updatePosttList(data){
-	$('#posts').append(`<li>${data.post.title}</li>`);
+function updatePostList(data){
+    $('#posts').append(`
+        <li>
+            <p>Title: ${data.post.title}</p>
+            <p>Author: ${data.post.author}</p>
+            <p>Content: ${data.post.content}</p>
+            <p>Publish Date: ${data.post.publishDate}</p>
+        </li>
+    `);
 }
 
 // Load all posts
@@ -87,7 +99,7 @@ function addNewPost(title, content, author, date){
 			}
 		})
 		.then(responseJSON => {
-			updateSportList(responseJSON);
+			updatePostList(responseJSON);
 		})
 		.catch(err => {
 			console.log(err);
@@ -101,7 +113,14 @@ function watchForm(){
         let content = $('#postContent').val();
         let author = $('#postAuthor').val();
         let date = $('#postDate').val();
-		addNewPost(title, content, author, date);
+        addNewPost(title, content, author, date);
+        $('#newPost').append(`
+            Successfully created post:
+            <p>Title: ${data.post.title}</p>
+            <p>Author: ${data.post.author}</p>
+            <p>Content: ${data.post.content}</p>
+            <p>Publish Date: ${data.post.publishDate}</p>
+        `);
 	});
 }
 
