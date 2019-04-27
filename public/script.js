@@ -19,14 +19,16 @@ $('#endpoints').on('click', '.collapsible', function(event){
 // Functions for endpoints
 // Display all posts
 function displayPostList(data){
-    console.log(data);
+    // console.log(data);
+    $('#posts').html("");
     for(let i = 0; i< data.posts.length; i++){
         $('#posts').append(`
             <li>
-                <p>Title: ${data.posts[i].title}</p>
-                <p>Author: ${data.posts[i].author}</p>
-                <p>Content: ${data.posts[i].content}</p>
-                <p>Publish Date: ${data.posts[i].publishDate}</p>
+                <p><b>Title:</b> ${data.posts[i].title}</p>
+                <p><b>Author:</b> ${data.posts[i].author}</p>
+                <p><b>Content:</b> ${data.posts[i].content}</p>
+                <p><b>Publish Date:</b> ${data.posts[i].publishDate}</p>
+                <p><b>Id:</b> ${data.posts[i].id}</p>
             </li>
         `)
     }
@@ -36,10 +38,11 @@ function displayPostList(data){
 function updatePostList(data){
     $('#posts').append(`
         <li>
-            <p>Title: ${data.post.title}</p>
-            <p>Author: ${data.post.author}</p>
-            <p>Content: ${data.post.content}</p>
-            <p>Publish Date: ${data.post.publishDate}</p>
+            <p><b>Title:</b> ${data.post.title}</p>
+            <p><b>Author:</b> ${data.post.author}</p>
+            <p><b>Content:</b> ${data.post.content}</p>
+            <p><b>Publish Date:</b> ${data.post.publishDate}</p>
+            <p><b>Id:</b> ${data.post.id}</p>
         </li>
     `);
 }
@@ -53,6 +56,28 @@ function onload(){
             'Content-Type' : 'application/json'
         }
     };
+
+    fetch(url, settings)
+        .then(response => {
+            if (response.ok){
+                return response.json();
+            }
+            throw Error(response.statusText);
+        })
+        .then(responseJSON => {
+            displayPostList(responseJSON);
+        });
+}
+
+// Load an author's posts
+function getAuthorPosts(author){
+    let url = `./posts/api/blog-posts/${author}`;
+    let settings = {
+        method : 'GET',
+        headers : {
+            'Content-Type' : 'application/json'
+        }
+    }
 
     fetch(url, settings)
         .then(response => {
@@ -106,15 +131,87 @@ function addNewPost(title, content, author, date){
 		});
 }
 
+function updatePost(id, title, content, author, date){
+    let url = `./posts/api/blog-posts/${id}`;
+    let data = {
+		title : title,
+        content : content,
+        author : author,
+        publishDate : date
+	};
+    let settings = {
+        method : 'PUT',
+        headers : {
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify(data)
+    }
+
+    fetch(url, settings)
+        .then(response => {
+            if (response.ok){
+                return response.json();
+            }
+            throw Error(response.statusText);
+        })
+        .then($(onload));
+}
+
+function deletePost(id){
+    let url = `./posts/api/blog-posts/${id}`;
+    let settings = {
+        method : 'DELETE',
+        headers : {
+            'Content-Type' : 'application/json'
+        }
+    }
+
+    fetch(url, settings)
+        .then(response => {
+            if (response.ok){
+                return response.json();
+            }
+            throw Error(response.statusText);
+        })
+        .then($(onload));
+}
+
 function watchForm(){
-	$('#createPost').on('click', function(event) {
+    $('#getAll').on('click', function(event) {
+        event.preventDefault();
+        $(onload);
+    });
+    
+    $('#getPosts').on('click', function(event){
+        event.preventDefault();
+        let author = $('#authorName').val();
+        getAuthorPosts(author);
+    });
+
+    $('#createPost').on('click', function(event) {
 		event.preventDefault();
 		let title = $('#postTitle').val();
         let content = $('#postContent').val();
         let author = $('#postAuthor').val();
         let date = $('#postDate').val();
         addNewPost(title, content, author, date);
-	});
+    });
+
+    $('#updatePost').on('click', function(event){
+        event.preventDefault();
+        let id = $('postId').val();
+        let title = $('#newTitle').val();
+        let content = $('#newContent').val();
+        let author = $('#newAuthor').val();
+        let date = $('#newDate').val();
+        updatePost(id, title, content, author, date);
+    });
+
+    $('#deletePost').on('click', function(event){
+        event.preventDefault();
+        let id = $('#deleteId').val();
+        deletePost(id);
+    });
 }
 
 function init(){

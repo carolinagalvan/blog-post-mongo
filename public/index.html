@@ -9,15 +9,20 @@
     </head>
     <body>
         <h1>Blog Posts</h1>
-        <div class="split left">
-            <div class="centered">
-                <button id="getAll">Get all Posts</button>
-                <ul id="posts"></ul>
-            </div>
+        <div class="list">
+            <ul id="posts">
+                <p><button id="getAll">Get all posts</button></p>
+                <li>
+                    <p><b>Title:</b> First Post</p>
+                    <p><b>Author:</b> Carolina</p>
+                    <p><b>Content:</b> First Post Content</p>
+                    <p><b>Publish Date:</b> 27-Abr-19</p>
+                </li>
+            </ul>
         </div>
 
-        <div id="split right">
-            <div class="centered">
+        <div id="endpoints">
+            <div>
                 <button class="collapsible">Get an author's post</button>
                 <div class="content">
                     <form>
@@ -42,17 +47,17 @@
                     <form>
                         <p>Post id: <input type="text" id="postId"/></p>
                         <p>Title: <input type="text" id="newTitle"/></p>
-                        <p>Content: </p> <textarea rows="5" cols="35" id="newcontent"></textarea>
+                        <p>Content: </p> <textarea rows="5" cols="35" id="newContent"></textarea>
                         <p>Author: <input type="text" id="newAuthor"/></p>
                         <p>Publish Date: <input type="text" id="newDate"/></p>
                     </form>
-                    <button id="deletePost">Update post</button>
+                    <button id="updatePost">Update post</button>
                 </div>
 
                 <button class="collapsible">Delete a post</button>
                 <div class="content">
                     <form>
-                        <p>Post id: <input type="text" id="postId"/></p>
+                        <p>Post id: <input type="text" id="deleteId"/></p>
                     </form>
                     <button id="deletePost">Delete post</button>
                 </div>
