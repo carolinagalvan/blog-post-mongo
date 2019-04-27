@@ -114,13 +114,6 @@ function watchForm(){
         let author = $('#postAuthor').val();
         let date = $('#postDate').val();
         addNewPost(title, content, author, date);
-        $('#newPost').append(`
-            Successfully created post:
-            <p>Title: ${data.post.title}</p>
-            <p>Author: ${data.post.author}</p>
-            <p>Content: ${data.post.content}</p>
-            <p>Publish Date: ${data.post.publishDate}</p>
-        `);
 	});
 }
 
