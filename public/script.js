@@ -216,6 +216,9 @@ function watchForm(){
         event.preventDefault();
         let author = $('#authorName').val();
         getAuthorPosts(author);
+        $('#authorForm').each(function(){
+            this.reset();
+        });
     });
 
     $('#createPost').on('click', function(event) {
@@ -228,6 +231,9 @@ function watchForm(){
             alert("Please fill out all fields.")
         }else{
             addNewPost(title, content, author, date);
+            $('#postForm').each(function(){
+                this.reset();
+            });
         }
         
     });
@@ -243,6 +249,9 @@ function watchForm(){
             alert("Please fill out all fields.")
         }else{
             updatePost(id, title, content, author, date);
+            $('#putForm').each(function(){
+                this.reset();
+            });
         }
     });
 
@@ -250,6 +259,9 @@ function watchForm(){
         event.preventDefault();
         let id = $('#deleteId').val();
         deletePost(id);
+        $('#deleteForm').each(function(){
+            this.reset();
+        });
     });
 }
 

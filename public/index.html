@@ -18,7 +18,7 @@
                         <div>
                             <button class="collapsible">Get an author's post</button>
                             <div class="content">
-                                <form>
+                                <form id="authorForm">
                                     <p>Author's Name: <input type="text" id="authorName"/></p>
                                 </form>
                                 <button id="getPosts">Get posts</button>
@@ -26,7 +26,7 @@
             
                             <button class="collapsible">Create a new post</button>
                             <div class="content">
-                                <form>
+                                <form id="postForm">
                                     <p>Title: <input type="text" id="postTitle"/></p>
                                     <p>Author: <input type="text" id="postAuthor"/></p>
                                     <p>Content: </p> <textarea rows="5" cols="35" id="postContent"></textarea>
@@ -37,7 +37,7 @@
             
                             <button class="collapsible">Update a post</button>
                             <div class="content">
-                                <form>
+                                <form id="putForm">
                                     <p>Post id: <input type="text" id="postId"/></p>
                                     <p>Title: <input type="text" id="newTitle"/></p>
                                     <p>Author: <input type="text" id="newAuthor"/></p>
@@ -49,7 +49,7 @@
             
                             <button class="collapsible">Delete a post</button>
                             <div class="content">
-                                <form>
+                                <form id="deleteForm">
                                     <p>Post id: <input type="text" id="deleteId"/></p>
                                 </form>
                                 <button id="deletePost">Delete post</button>
