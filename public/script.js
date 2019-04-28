@@ -19,16 +19,15 @@ $('#endpoints').on('click', '.collapsible', function(event){
 // Functions for endpoints
 // Display all posts
 function displayPostList(data){
-    // console.log(data);
     $('#posts').html("");
-    for(let i = 0; i< data.posts.length; i++){
+    for(let i = data.posts.length - 1; i >= 0; i--){
         $('#posts').append(`
             <li>
                 <p><b>Title:</b> ${data.posts[i].title}</p>
                 <p><b>Author:</b> ${data.posts[i].author}</p>
                 <p><b>Content:</b> ${data.posts[i].content}</p>
                 <p><b>Publish Date:</b> ${data.posts[i].publishDate}</p>
-                <p><b>Id:</b> ${data.posts[i].id}</p>
+                <p><b>Id:</b> ${data.posts[i]._id}</p>
             </li>
         `)
     }
@@ -36,13 +35,13 @@ function displayPostList(data){
 
 // Update list of posts
 function updatePostList(data){
-    $('#posts').append(`
+    $('#posts').prepend(`
         <li>
             <p><b>Title:</b> ${data.post.title}</p>
             <p><b>Author:</b> ${data.post.author}</p>
             <p><b>Content:</b> ${data.post.content}</p>
             <p><b>Publish Date:</b> ${data.post.publishDate}</p>
-            <p><b>Id:</b> ${data.post.id}</p>
+            <p><b>Id:</b> ${data.post._id}</p>
         </li>
     `);
 }
@@ -88,7 +87,11 @@ function getAuthorPosts(author){
         })
         .then(responseJSON => {
             displayPostList(responseJSON);
-        });
+        })
+        .catch(err => {
+            alert(err.message);
+			console.log(err);
+		});
 }
 
 // Create a new post
@@ -127,6 +130,7 @@ function addNewPost(title, content, author, date){
 			updatePostList(responseJSON);
 		})
 		.catch(err => {
+            alert(err.message);
 			console.log(err);
 		});
 }
@@ -148,13 +152,26 @@ function updatePost(id, title, content, author, date){
     }
 
     fetch(url, settings)
-        .then(response => {
-            if (response.ok){
-                return response.json();
-            }
-            throw Error(response.statusText);
-        })
-        .then($(onload));
+		.then(response => {
+			if (response.ok){
+				return response.json();
+			}
+			else{
+				return new Promise(function(resolve, reject){
+					resolve(response.json());
+				})
+				.then(data =>{
+					throw new Error(data.message);
+				});
+			}
+		})
+		.then(responseJSON => {
+			$(onload);
+		})
+		.catch(err => {
+            alert(err.message);
+			console.log(err);
+		});
 }
 
 function deletePost(id){
@@ -165,15 +182,28 @@ function deletePost(id){
             'Content-Type' : 'application/json'
         }
     }
-
+    
     fetch(url, settings)
-        .then(response => {
-            if (response.ok){
-                return response.json();
-            }
-            throw Error(response.statusText);
-        })
-        .then($(onload));
+		.then(response => {
+			if (response.ok){
+				return response.json();
+			}
+			else{
+				return new Promise(function(resolve, reject){
+					resolve(response.json());
+				})
+				.then(data =>{
+					throw new Error(data.message);
+				});
+			}
+		})
+		.then(responseJSON => {
+			$(onload);
+		})
+		.catch(err => {
+            alert(err.message);
+			console.log(err);
+		});
 }
 
 function watchForm(){
@@ -194,17 +224,26 @@ function watchForm(){
         let content = $('#postContent').val();
         let author = $('#postAuthor').val();
         let date = $('#postDate').val();
-        addNewPost(title, content, author, date);
+        if(title == "" || content == "" || author == "" || date == ""){
+            alert("Please fill out all fields.")
+        }else{
+            addNewPost(title, content, author, date);
+        }
+        
     });
 
     $('#updatePost').on('click', function(event){
         event.preventDefault();
-        let id = $('postId').val();
+        let id = $('#postId').val();
         let title = $('#newTitle').val();
         let content = $('#newContent').val();
         let author = $('#newAuthor').val();
         let date = $('#newDate').val();
-        updatePost(id, title, content, author, date);
+        if(id == "" || title == "" || content == "" || author == "" || date == ""){
+            alert("Please fill out all fields.")
+        }else{
+            updatePost(id, title, content, author, date);
+        }
     });
 
     $('#deletePost').on('click', function(event){

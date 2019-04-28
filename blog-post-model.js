@@ -26,7 +26,7 @@ const ListPosts = {
     },
     
     getAuthor : function(myAuthor){
-        return Posts.findOne({author: myAuthor})
+        return Posts.find({author: myAuthor})
             .then(post => {
                 return post;
             })

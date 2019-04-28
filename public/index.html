@@ -9,60 +9,61 @@
     </head>
     <body>
         <h1>Blog Posts</h1>
-        <div class="list">
-            <ul id="posts">
-                <p><button id="getAll">Get all posts</button></p>
-                <li>
-                    <p><b>Title:</b> First Post</p>
-                    <p><b>Author:</b> Carolina</p>
-                    <p><b>Content:</b> First Post Content</p>
-                    <p><b>Publish Date:</b> 27-Abr-19</p>
-                </li>
-            </ul>
-        </div>
-
-        <div id="endpoints">
-            <div>
-                <button class="collapsible">Get an author's post</button>
-                <div class="content">
-                    <form>
-                        <p>Author's Name: <input type="text" id="authorName"/></p>
-                    </form>
-                    <button id="getPosts">Get posts</button>
-                </div>
-
-                <button class="collapsible">Create a new post</button>
-                <div class="content">
-                    <form>
-                        <p>Title: <input type="text" id="postTitle"/></p>
-                        <p>Content: </p> <textarea rows="5" cols="35" id="postContent"></textarea>
-                        <p>Author: <input type="text" id="postAuthor"/></p>
-                        <p>Publish Date: <input type="text" id="postDate"/></p>
-                    </form>
-                    <button id="createPost">Create post</button>
-                </div>
-
-                <button class="collapsible">Update a post</button>
-                <div class="content">
-                    <form>
-                        <p>Post id: <input type="text" id="postId"/></p>
-                        <p>Title: <input type="text" id="newTitle"/></p>
-                        <p>Content: </p> <textarea rows="5" cols="35" id="newContent"></textarea>
-                        <p>Author: <input type="text" id="newAuthor"/></p>
-                        <p>Publish Date: <input type="text" id="newDate"/></p>
-                    </form>
-                    <button id="updatePost">Update post</button>
-                </div>
-
-                <button class="collapsible">Delete a post</button>
-                <div class="content">
-                    <form>
-                        <p>Post id: <input type="text" id="deleteId"/></p>
-                    </form>
-                    <button id="deletePost">Delete post</button>
-                </div>
-            </div>
-        <div>
+        
+        <table align="center">
+            <tr>
+                <td>
+                    <p><button id="getAll">Get all posts</button></p>
+                    <div id="endpoints">
+                        <div>
+                            <button class="collapsible">Get an author's post</button>
+                            <div class="content">
+                                <form>
+                                    <p>Author's Name: <input type="text" id="authorName"/></p>
+                                </form>
+                                <button id="getPosts">Get posts</button>
+                            </div>
+            
+                            <button class="collapsible">Create a new post</button>
+                            <div class="content">
+                                <form>
+                                    <p>Title: <input type="text" id="postTitle"/></p>
+                                    <p>Author: <input type="text" id="postAuthor"/></p>
+                                    <p>Content: </p> <textarea rows="5" cols="35" id="postContent"></textarea>
+                                    <p>Publish Date: <input type="text" id="postDate"/></p>
+                                </form>
+                                <button id="createPost">Create post</button>
+                            </div>
+            
+                            <button class="collapsible">Update a post</button>
+                            <div class="content">
+                                <form>
+                                    <p>Post id: <input type="text" id="postId"/></p>
+                                    <p>Title: <input type="text" id="newTitle"/></p>
+                                    <p>Author: <input type="text" id="newAuthor"/></p>
+                                    <p>Content: </p> <textarea rows="5" cols="35" id="newContent"></textarea>
+                                    <p>Publish Date: <input type="text" id="newDate"/></p>
+                                </form>
+                                <button id="updatePost">Update post</button>
+                            </div>
+            
+                            <button class="collapsible">Delete a post</button>
+                            <div class="content">
+                                <form>
+                                    <p>Post id: <input type="text" id="deleteId"/></p>
+                                </form>
+                                <button id="deletePost">Delete post</button>
+                            </div>
+                        </div>
+                    <div>
+                </td>
+                <td>
+                    <div class="list">
+                        <ul id="posts"></ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
 
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script src="./script.js"></script>

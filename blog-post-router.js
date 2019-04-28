@@ -89,16 +89,7 @@ router.post('/blog-posts', (req, res, next) => {
 
 //DELETE requests should go to /blog-posts/:id
 router.delete('/blog-posts/:id', (req, res, next) => {
-    let bodyId = req.body.id;
     let paramId = req.params.id;
-
-    if(!bodyId || !paramId || bodyId != paramId){
-        res.status(406).json({
-            message: "Missing id field in body or paramters or id's don't match.",
-            status: 406
-        });
-        return next();
-    }
    
     ListPosts.delete(paramId)
 		.then(post => {

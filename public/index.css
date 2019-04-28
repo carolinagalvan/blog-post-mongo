@@ -8,42 +8,41 @@ h1{
     text-align: center;
 }
 
-form{
-  margin: 15px;
+table{
+  width:100%;
+}
+
+td{
+  vertical-align: top;
+  width: 50%;
 }
 
 ul{
   list-style-type: none;
+  margin-left: -15px;
 }
 
-ul li {
+li {
   background: #eee;
-  margin: 10px;
-  padding: 10px;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-.split {
-  width: 50%;
-  position: fixed;
-  z-index: 1;
-  top: 20;
-  overflow-x: hidden;
-  padding-top: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
+#getAll{
+  background-color: #eee;
+  border: none;
+  padding: 15px 32px;
+  color: #444;
+  font-size: 20px;
+  width: 100%;
+  margin-top: 0px;
 }
 
-.list{
-  right: 0;
-  width: 50%;
-  position: fixed;
-  margin-right: 20px;
-}
-
-.endpoints{
-  left: 0;
-  width: 50%;
-  margin-top: 2px;
+#getAll:hover {
+  background-color: #ccc;
+  color: black;
 }
 
 /* Collapsible Menu CSS source: https://www.w3schools.com/howto/howto_js_collapsible.asp */
@@ -53,7 +52,7 @@ ul li {
     color: #444;
     cursor: pointer;
     padding: 18px;
-    width: 50%;
+    width: 100%;
     border: none;
     text-align: left;
     outline: none;
@@ -67,7 +66,7 @@ ul li {
   
   /* Style the collapsible content. Note: hidden by default */
   .content {
-    padding: 0 18px;
+    /* padding: 0 18px; */
     background-color: white;
     max-height: 0;
     overflow: hidden;
